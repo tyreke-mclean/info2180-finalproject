@@ -8,8 +8,12 @@ header{
     grid-template-columns: 100px 800px ;
 }
 
+.container >img{
+    grid-column: 1;
+    padding-top: 25px;
+}
 .flex-item{
-    grid-row: 1;
+    grid-column: 2;
     color: white;
     
 }
