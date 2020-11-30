@@ -1,8 +1,14 @@
 header{
     background-color: black;
-  
+    display: grid;
+
+}
+.unnamed{
+   
+    grid-template-columns: 200px 800px ;
 }
 .container{
+    grid-column: 2;
     display: grid;
     grid-template-rows: 100px ;
     grid-template-columns: 100px 800px ;
@@ -16,4 +22,25 @@ header{
     grid-column: 2;
     color: white;
     
+}
+main{
+    margin-left: 160px;
+}
+.menu{ 
+   
+    background-color:whitesmoke; 
+    height: 100%;
+    width: 150px;
+    padding-top: 20px;
+    
+    position: absolute;
+}
+.menu button{
+    width: 100%;
+    margin-top: -10px;
+    height: 50px;
+    border: 0;
+}
+footer{
+    margin-left: 160px;
 }
