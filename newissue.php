@@ -40,37 +40,7 @@ session_start();
         </div>         
     </aside>
     <main>
-            <div id="newUserForm">
-                <h1>New User</h1>
-                <?php
-                    //  if (isset($_GET['success'])) {
-                    //      if (isset($_GET['success']) == 'signup'){
-                    //     echo "<h1>You're logged in</h1>";
-                    //     echo $_SESSION['email'];
-                    //      }
-                    // }
-                    if (isset($_SESSION['email'])){
-                    echo $_SESSION['email'];
-                    }
-                ?>
-                <form class="form-group" action="adduser.php" method="post">
-                    Firstname <br>
-                    <input id="firstN" type="text" name="firstname">
-                    <br>
-                    Lastname <br>
-                    <input id="lastN" type="text" name="lastname">
-                    <br>
-                    Password <br>
-                    <input id="passWord" type="password" name="password">
-                    <br>
-                    Email <br>
-                    <input id="email" type="email" name="emailAddress">
-                    <button type="submit" name="add-user" class="button">Submit</button>
-                   
-                </form>
-            </div>
-
-            <div id="createIssue">
+    <div id="createIssue">
                 <h1>Create Issue</h1>
                 <div class="issue-form-group">
                     Title<br>
@@ -101,8 +71,7 @@ session_start();
                 <button type="submit" class="button">Submit</button>
             </div>
 
-            <div id="dashBoard"></div>
-            <div id="logout"></div>
+            
         </main>
 
 
