@@ -65,6 +65,8 @@ session_start();
                             <br>
                             Email <br>
                             <input id="email" type="email" name="emailAddress">
+                            <br>
+                            <br>
                             <button type="submit" name="add-user" class="button">Submit</button>
                         
                         </form>
