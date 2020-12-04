@@ -26,16 +26,16 @@ session_start();
         <div class="menu">
             
             
-            <a href="home.php" class="menuButton"><img src="home.png" width="30" height="30"><i class="fas fa-home"></i>Home </a>
+            <a href="home.php" class="menuButton"><i class="fas fa-home"></i>Home </a>
             <br>
             <br>
-            <a href="newuser.php" class="menuButton"><img src="Data User.png" width="30" height="30"><i class="fas fa-user-plus"></i>Add User </a>
+            <a href="newuser.php" class="menuButton"><i class="fas fa-user-plus"></i>Add User </a>
             <br>
             <br>
-            <a href="newissue.php" class="menuButton"><img src="new issue.png" width="30" height="30"><i class="fas fa-plus-circle"></i> New Issue </a>
+            <a href="newissue.php" class="menuButton"><i class="fas fa-plus-circle"></i> New Issue </a>
             <br>
             <br>
-            <a href="logout.php" class="menuButton"><img src="Log Out.png" width="30" height="30"><i class="fas fa-sign-out-alt"></i> Logout </a>
+            <a href="logout.php" class="menuButton"><i class="fas fa-sign-out-alt"></i> Logout </a>
             
         </div>         
     </aside>
@@ -71,9 +71,9 @@ session_start();
                     </div>
                     <footer>
                 <footer><div id="box3" class="grid-item"> </div></footer>
-
-            <p>Copyright &copy; 2020, Donald Berry, Tahj Gordon, Tyreke McLean, Noel Powell</p>
-            </footer>
+                <br>
+                <p>Copyright &copy; 2020, Donald Berry, Tahj Gordon, Tyreke McLean, Noel Powell</p>
+                </footer>
             
                 
             
