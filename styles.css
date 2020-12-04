@@ -27,7 +27,7 @@ main{
     margin-left: 160px;
 }
 .menu{ 
-   
+
     background-color:whitesmoke; 
     height: 100%;
     width: 150px;
@@ -36,10 +36,19 @@ main{
     position: absolute;
 }
 .menu button{
-    width: 100%;
+
+    width: 100%; 
     margin-top: -10px;
     height: 50px;
     border: 0;
+}
+.menu a{
+    width: 100%; 
+    margin-top: -10px;
+    height: 50px;
+    border: 0;
+    text-decoration:none;
+
 }
 footer{
     margin-left: 160px;
