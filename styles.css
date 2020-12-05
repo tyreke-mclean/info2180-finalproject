@@ -50,6 +50,10 @@ main{
     text-decoration:none;
     color: black;
 }
+
+.error {
+    color:red;
+}
 footer{
     margin-left: 160px;
 }

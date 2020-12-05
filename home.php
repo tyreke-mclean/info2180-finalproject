@@ -23,7 +23,10 @@ session_start();
     </header>
     
     <aside>
-        <div class="menu">
+        <?php
+        if (isset($_SESSION['admin'])) {
+
+       echo  '<div class="menu">
             
             <a href="home.php" class="menuButton"><i class="fas fa-home"></i>Home </a>
             <br>
@@ -36,14 +39,60 @@ session_start();
             <br>
             <a href="logout.php" class="menuButton"><i class="fas fa-sign-out-alt"></i> Logout </a>
             
-        </div>         
+        </div>'; 
+        } else if (isset($_SESSION['user'])) {
+            echo  '<div class="menu">
+            
+            <a href="home.php" class="menuButton"><i class="fas fa-home"></i>Home </a>
+            <br>
+            <br>
+            <a href="newissue.php" class="menuButton"><i class="fas fa-plus-circle"></i> New Issue </a>
+            <br>
+            <br>
+            <a href="logout.php" class="menuButton"><i class="fas fa-sign-out-alt"></i> Logout </a>
+            
+        </div>'; 
+        } else {
+            echo  '<div class="menu">
+            
+            <a href="home.php" class="menuButton"><i class="fas fa-home"></i>Home </a>
+            <br>
+            <br>
+            <a href="home.php" class="menuButton"><i class="fas fa-plus-circle"></i> New Issue </a>
+            <br>';
+        }
+        
+        ?>
     </aside>
     <main>
     <div id="dashBoard"></div>
+    <?php
+    if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
+        echo "User's issues should be displayed here";
+            } else {
+                echo '<form class="form-group" action="loginuser.php" method="post">
+        
+                Password <br>
+                <input id="passWord" type="password" name="password">
+                <br>
+                Email <br>
+                
+                <input id="email" type="email" name="emailAddress">
+                <br>
+                <br>
+                <button type="submit" name="login-user" class="button">Submit</button>
             
+            </form>';
+            }
+            ?>
         </main>
-
-
+        <?php
+        if (isset($_SESSION['admin'])) {
+            echo "<h1>add is:" . $_SESSION['admin'] . "</h1>";
+        } else if (isset($_SESSION['user'])) {
+            echo "<h1>add is:" . $_SESSION['user'] . "</h1>";
+        } 
+        ?>
     <footer>
         <footer><div id="box3" class="grid-item"> </div></footer>
 
