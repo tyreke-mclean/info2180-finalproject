@@ -23,8 +23,10 @@ session_start();
     </header>
     
     <aside>
-        <div class="menu">
-            
+    <?php
+        if (isset($_SESSION['admin'])) {
+
+       echo  '<div class="menu">
             
             <a href="home.php" class="menuButton"><i class="fas fa-home"></i>Home </a>
             <br>
@@ -37,7 +39,21 @@ session_start();
             <br>
             <a href="logout.php" class="menuButton"><i class="fas fa-sign-out-alt"></i> Logout </a>
             
-        </div>         
+        </div>'; 
+        } else if ($_SESSION['user']) {
+            echo  '<div class="menu">
+            
+            <a href="home.php" class="menuButton"><i class="fas fa-home"></i>Home </a>
+            <br>
+            
+            <a href="newissue.php" class="menuButton"><i class="fas fa-plus-circle"></i> New Issue </a>
+            <br>
+            <br>
+            <a href="logout.php" class="menuButton"><i class="fas fa-sign-out-alt"></i> Logout </a>
+            
+        </div>'; 
+        } 
+        ?>     
     </aside>
             <main>
         <div id="newUserForm">
