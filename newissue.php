@@ -1,107 +1,92 @@
 <?php
 session_start();
+require_once('conn.php');
+$email = $_SESSION['email']; 
+$title;
+$desc;
+$assigned;
+$type;
+$priority;
+$nregtest = "/^[A-Za-z.\s-]+$/";
+
+
+try{
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $action = filter_var($_GET['action'], FILTER_SANITIZE_STRING);
+    switch($action){
+        case 'getnames':
+            $mysql = $conn->query("SELECT firstname, lastname FROM users");
+            $allusers = $mysql->fetchAll(PDO::FETCH_ASSOC);
+            $select_div = '<select>';
+            foreach($allusers as $row){
+                $option = "<option value='{$row['firstname']} {$row['lastname']}'>{$row['firstname']} {$row['lastname']}</option>";
+                $select_div .= $option;
+            }
+            $select_div .= "</select>";
+            echo $select_div;
+        break;
+
+        case 'submit':
+            $clean_title = filter_var($_GET['title'], FILTER_SANITIZE_STRING);
+            $clean_desc = filter_var($_GET['description'], FILTER_SANITIZE_STRING);
+            $clean_assigned = filter_var($_GET['assign'], FILTER_SANITIZE_STRING);
+            $clean_type = filter_var($_GET['type'], FILTER_SANITIZE_STRING);
+            $clean_priority = filter_var($_GET['priority'], FILTER_SANITIZE_STRING);
+
+            print_r($_GET['type']);
+            //Iitle VALIDATION
+            if (empty($clean_title) || !preg_match ($nregtest, $clean_title)){
+                echo "Title Invalid";
+            }else{
+                $title = strval($clean_title);
+            }
+            //Description VALIDATION
+            if (empty($clean_desc) || !preg_match ($nregtest, $clean_desc)){
+                echo "Description Invalid";
+            }else{
+                $desc = strval($clean_desc);
+            }
+            //Assigned VALIDATION
+            if (empty($clean_assigned) || !preg_match ($nregtest, $clean_assigned)){
+                echo "Assigned Invalid";
+            }else{
+                $assigned = $clean_assigned;
+            }
+            //Type VALIDATION
+            if (empty($clean_type) || !preg_match ($nregtest, $clean_type)){
+                echo "Type Invalid";
+            }else{
+                $type = $clean_type;
+            }
+            //priority VALIDATION
+            if (empty($clean_priority) || !preg_match ($nregtest, $clean_priority)){
+                echo "Priority Invalid";
+            }else{
+                $priority = strval($clean_priority);
+            }
+        
+            if(isset($title) && isset($desc) && isset($assigned) && isset($type) && isset($priority) ){
+                $name = explode(" ", $assigned); 
+                $fname = strval($name[0]);
+                $lname = strval($name[1]);
+                $idsql = $conn->query("SELECT `id` FROM `users` WHERE `firstname` = '$fname' AND `lastname` = '$lname'");
+                $assigned = $idsql->fetchAll(PDO::FETCH_ASSOC);
+                $assigned_id = intval($assigned[0]['id']);
+               
+               
+                $newidsql = $conn->query("SELECT `id` FROM `users` WHERE email = '$email'");
+                $created_id = $newidsql->fetchAll(PDO::FETCH_ASSOC);
+                $created = intval($created_id[0]);
+
+                $conn->query("INSERT INTO `issues`(`title`,`description`, `type`, `priority`, `status`, `assigned_to`, `created_by`) VALUES ('$title', '$desc', '$type', '$priority', 'Open', $assigned_id, $created)");
+            }else{
+                echo "Error.";
+            }
+         break;
+    }
+    
+}catch(Exception $e){
+    //Throw Exception
+}
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>INFO2180 Project 2</title>
- <link rel="stylesheet" href="styles.css">
- <script src="script.js"></script>
- <script src="https://kit.fontawesome.com/0d4c0a0b4d.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <header>
-    
-    <div class="container">
-        <img src="Antivirus.png" alt="Icon of a computer bug" width="50" height="50" />
-        <h1><div id="box1" class="flex-item">BugMe Issue Tracker</div></h1>
-    
-    </div>
-    </header>
-    
-    <aside>
-    <?php
-        if (isset($_SESSION['admin'])) {
-
-       echo  '<div class="menu">
-            
-            <a href="home.php" class="menuButton"><i class="fas fa-home"></i>Home </a>
-            <br>
-            <br>
-            <a href="newuser.php" class="menuButton"><i class="fas fa-user-plus"></i>Add User </a>
-            <br>
-            <br>
-            <a href="newissue.php" class="menuButton"><i class="fas fa-plus-circle"></i> New Issue </a>
-            <br>
-            <br>
-            <a href="logout.php" class="menuButton"><i class="fas fa-sign-out-alt"></i> Logout </a>
-            
-        </div>'; 
-        } else if ($_SESSION['user']) {
-            echo  '<div class="menu">
-            
-            <a href="home.php" class="menuButton"><i class="fas fa-home"></i>Home </a>
-            <br>
-            <br>
-            <a href="newissue.php" class="menuButton"><i class="fas fa-plus-circle"></i> New Issue </a>
-            <br>
-            <br>
-            <a href="logout.php" class="menuButton"><i class="fas fa-sign-out-alt"></i> Logout </a>
-            
-        </div>'; 
-        } 
-        
-        ?>     
-    </aside>
-    <main>
-    <div id="createIssue">
-                <h1>Create Issue</h1>
-                <div class="issue-form-group">
-                    Title<br>
-                    <input id="issueTitle" type="text" name="issue-title">
-                    <br>
-                    Description <br>
-                    <input id="issueDescrption" type="text" name="issueDescrption">
-                    <br>
-                    Assigned To<br>
-                    <select name="issueAssignedTo" id="assigned">
-
-                    </select>
-                    <br>
-                    Type <br>
-                    <select name="issueType" id="issueType">
-                        <option value="Bug">Bug</option>
-                        <option value="Task">Task</option>
-                        <option value="Proposal">Proposal</option>
-                    </select>
-                    <br>
-                    Priority <br>
-                    <select name="priorityType" id="priority">
-                        <option value="Minor">Minor</option>
-                        <option value="Major">Major</option>
-                        <option value="Critical">Critical</option>
-                    </select>
-                </div>
-                <button type="submit" class="button">Submit</button>
-            </div>
-
-            
-        </main>
-
-
-    <footer>
-        <footer><div id="box3" class="grid-item"> </div></footer>
-
-    <p>Copyright &copy; 2020, Donald Berry, Tahj Gordon, Tyreke McLean, Noel Powell</p>
-    </footer>
-    
-        
-    
-    </main>
-    
-</body>
-</html> 
