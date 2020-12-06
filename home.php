@@ -67,8 +67,17 @@ session_start();
     <main>
     <div id="dashBoard"></div>
     <?php
+    echo ""; 
     if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
-        echo "User's issues should be displayed here";
+        echo '<h1>Issues</h1>
+        <a href="newissue.php">Create New Issue </a>
+        
+        <div class="filter-group">
+        Filter by: 
+        <button type="radio" name="filter" class="button">ALL</button>
+        <button type="radio" name="filter" class="button">OPEN</button>
+        <button type="radio" name="filter" class="button">MY TICKETS</button>
+        </div>';
             } else {
                 echo '<form class="form-group" action="loginuser.php" method="post">
         
@@ -85,14 +94,15 @@ session_start();
             </form>';
             }
             ?>
+            <?php
+                if (isset($_SESSION['admin'])) {
+                    echo "<h1>add is:" . $_SESSION['admin'] . "</h1>";
+                } else if (isset($_SESSION['user'])) {
+                    echo "<h1>add is:" . $_SESSION['user'] . "</h1>";
+                } 
+            ?>
         </main>
-        <?php
-        if (isset($_SESSION['admin'])) {
-            echo "<h1>add is:" . $_SESSION['admin'] . "</h1>";
-        } else if (isset($_SESSION['user'])) {
-            echo "<h1>add is:" . $_SESSION['user'] . "</h1>";
-        } 
-        ?>
+        
     <footer>
         <footer><div id="box3" class="grid-item"> </div></footer>
 
