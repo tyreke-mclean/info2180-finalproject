@@ -67,12 +67,14 @@ session_start();
     <main>
     <div id="dashBoard"></div>
     <?php
+    echo '<div class="newI">
+        <h1>Issues</h1>
+        <a href="newissue.php">Create New Issue </a>
+        </div>';   
+    
     echo ""; 
     if (isset($_SESSION['user']) || isset($_SESSION['admin'])) {
-        echo '<h1>Issues</h1>
-        <a href="newissue.php">Create New Issue </a>
-        
-        <div class="filter-group">
+        echo '<div class="filter-group">
         Filter by: 
         <button type="radio" name="filter" class="button">ALL</button>
         <button type="radio" name="filter" class="button">OPEN</button>
