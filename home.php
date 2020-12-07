@@ -97,13 +97,7 @@ session_start();
             </form>';
             }
             ?>
-            <?php
-                if (isset($_SESSION['admin'])) {
-                    echo "<h1>add is:" . $_SESSION['admin'] . "</h1>";
-                } else if (isset($_SESSION['user'])) {
-                    echo "<h1>add is:" . $_SESSION['user'] . "</h1>";
-                } 
-            ?>
+            
         </main>
         
     <footer>
