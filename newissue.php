@@ -4,6 +4,7 @@ require_once('conn.php');
 $email = $_SESSION['email']; 
 $title;
 $desc;
+$action;
 $assigned;
 $type;
 $priority;
@@ -15,7 +16,7 @@ try{
     $action = filter_var($_GET['action'], FILTER_SANITIZE_STRING);
     switch($action){
         case 'getnames':
-            $mysql = $conn->query("SELECT firstname, lastname FROM users");
+            $mysql = $conn->query("SELECT firstname, lastname FROM adduser");
             $allusers = $mysql->fetchAll(PDO::FETCH_ASSOC);
             $select_div = '<select>';
             foreach($allusers as $row){

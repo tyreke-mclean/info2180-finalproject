@@ -27,6 +27,7 @@ header{
 }
 main{
     margin-left: 160px;
+    margin-top: 30px;
 }
 
 .menu{ 
@@ -53,6 +54,7 @@ main{
     border-radius: 5px;
     height: 30px;
 }
+
 .form-group > button{
     background-color: rgba(25, 95, 226, 0.87);
     color: white;
